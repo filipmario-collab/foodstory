@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Food Story by Nagy</title>
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light;
+    --coral:#e5957a;
+    --coral-dark:#d67e62;
+    --ink:#2a221e;
+    --cream:#fdf8f4;
+    --warm:#f5ebe3;
+    --muted:#7a6f68;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;overflow-x:hidden}
+  h1,h2,h3,.display{font-family:'Amatic SC',cursive;font-weight:700;line-height:0.95}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;
+    background:linear-gradient(180deg,rgba(20,14,10,.55),rgba(30,20,14,.78)),
+      radial-gradient(circle at 50% 35%,#4a352a,#241a14 70%);
+    color:#fff;padding-bottom:48px}
+  .topbar{display:flex;flex-direction:column;align-items:center;padding:34px 24px 0}
+  .logo{width:170px;height:170px;display:flex;align-items:center;justify-content:center}
+  .logo svg{width:100%;height:100%}
+  .rule{width:100%;max-width:980px;height:1px;background:rgba(255,255,255,.35);margin:26px auto 0}
+
+  .controls{display:flex;align-items:center;justify-content:space-between;
+    max-width:980px;margin:24px auto 0;padding:0 24px;width:100%}
+  .burger{width:54px;height:54px;border:none;border-radius:8px;background:var(--coral);
+    display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;cursor:pointer}
+  .burger span{display:block;width:24px;height:3px;background:#fff;border-radius:2px}
+  .social{display:flex;gap:16px}
+  .social a{width:56px;height:56px;border-radius:50%;background:var(--coral);
+    display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .social a:hover{background:var(--coral-dark)}
+  .social svg{width:26px;height:26px;fill:#fff}
+
+  .nav{display:none;max-width:980px;margin:14px auto 0;padding:14px 24px;width:100%;
+    background:rgba(0,0,0,.35);border-radius:10px}
+  .nav.open{display:block}
+  .nav a{display:block;padding:10px 4px;font-size:18px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .nav a:last-child{border-bottom:none}
+
+  .hero-copy{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:48px 24px 0;max-width:820px;margin:0 auto}
+  .hero-copy h1{font-size:clamp(56px,11vw,104px);letter-spacing:1px}
+  .hero-copy .sub{font-family:'Amatic SC',cursive;font-weight:700;font-size:clamp(30px,5vw,44px);
+    margin-top:6px}
+  .squiggle{width:180px;height:18px;margin:24px 0}
+  .squiggle path{stroke:var(--coral);stroke-width:4;fill:none;stroke-linecap:round}
+  .hero-copy p{font-size:clamp(17px,2.4vw,21px);max-width:640px;font-weight:300}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--coral);color:#fff;
+    font-family:'Amatic SC',cursive;font-weight:700;font-size:26px;letter-spacing:1px;
+    padding:16px 46px;border-radius:40px;margin-top:34px;transition:background .2s,transform .2s}
+  .btn:hover{background:var(--coral-dark);transform:translateY(-2px)}
+
+  /* SECTION */
+  section.block{padding:90px 0}
+  .eyebrow{font-family:'Amatic SC',cursive;font-weight:700;font-size:30px;color:var(--coral);
+    text-align:center;letter-spacing:2px}
+  .h2{font-size:clamp(40px,6vw,62px);text-align:center;max-width:760px;margin:6px auto 0}
+  .lead{max-width:720px;margin:30px auto 0;text-align:center;color:var(--muted);font-weight:300;font-size:18px}
+  .lead b{color:var(--ink);font-weight:600}
+  .lead + .lead{margin-top:18px}
+
+  /* MENU */
+  .menu{background:var(--warm)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+  .card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 14px 40px rgba(120,80,55,.08)}
+  .card .pill{display:inline-block;background:var(--coral);color:#fff;font-family:'Amatic SC',cursive;
+    font-weight:700;font-size:26px;padding:4px 22px;border-radius:30px;letter-spacing:1px}
+  .card h3{font-size:34px;margin-top:14px}
+  .card .grp{margin-top:16px}
+  .card .grp .label{font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--coral)}
+  .card ul{list-style:none;margin-top:6px;columns:2;font-size:15px;color:var(--muted)}
+  .card ul li{padding:2px 0}
+
+  /* SPLIT */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split .text h2{font-size:clamp(36px,5vw,54px);text-align:left}
+  .split .text .eyebrow{text-align:left}
+  .split .text p{color:var(--muted);font-weight:300;margin-top:18px}
+  .split .text .btn{font-size:24px;padding:12px 38px}
+  .photo{aspect-ratio:4/5;border-radius:20px;
+    background:radial-gradient(circle at 40% 30%,#caa68f,#7a5742);
+    display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);
+    font-family:'Amatic SC',cursive;font-size:30px}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#e9ddd4;padding:80px 0 30px}
+  .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  footer h4{font-family:'Amatic SC',cursive;font-weight:700;font-size:30px;color:var(--coral);margin-bottom:14px}
+  footer p,footer li{font-weight:300;font-size:15px;color:#cdbfb4;margin-bottom:6px}
+  footer a:hover{color:var(--coral)}
+  footer ul{list-style:none}
+  .copy{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#9d9088}
+
+  @media(max-width:860px){
+    .cards{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr;gap:34px}
+    .split .photo{order:-1}
+    .fgrid{grid-template-columns:1fr}
+  }
+  @media(prefers-color-scheme:dark){
+    body{background:var(--cream);color:var(--ink)}
+    .menu{background:var(--warm)}
+    .card{background:#fff}
+    .lead{color:var(--muted)}
+    .split .text p{color:var(--muted)}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="topbar">
+    <div class="logo">
+      <svg viewBox="0 0 200 200" aria-label="Food Story by Nagy">
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="1.6"/>
+        <g transform="translate(96,54) rotate(24)" stroke="#fff" stroke-width="1.8"
+           fill="none" stroke-linecap="round">
+          <path d="M0,6 C -2,-16 -2,-32 0,-52"/>
+          <path d="M0,-8 C -4,-11 -8,-16 -11,-24"/><path d="M0,-8 C 4,-11 8,-16 11,-24"/>
+          <path d="M0,-16 C -4,-19 -8,-24 -10,-31"/><path d="M0,-16 C 4,-19 8,-24 10,-31"/>
+          <path d="M0,-24 C -3,-27 -7,-31 -9,-37"/><path d="M0,-24 C 3,-27 7,-31 9,-37"/>
+          <path d="M0,-32 C -3,-35 -6,-38 -7,-43"/><path d="M0,-32 C 3,-35 6,-38 7,-43"/>
+          <path d="M0,-40 C -2,-42 -4,-45 -5,-49"/><path d="M0,-40 C 2,-42 4,-45 5,-49"/>
+          <path d="M0,-46 C -3,-49 -3,-53 0,-56 C 3,-53 3,-49 0,-46 Z"/>
+        </g>
+        <text x="100" y="106" text-anchor="middle" fill="#fff"
+          style="font-family:'Amatic SC',cursive;font-weight:700;font-size:40px;letter-spacing:1px">FOOD STORY</text>
+        <text x="100" y="130" text-anchor="middle" fill="#fff"
+          style="font-family:'Poppins',sans-serif;font-size:10px;letter-spacing:4px">BY NAGY</text>
+      </svg>
+    </div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="controls">
+    <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+    <div class="social">
+      <a href="https://www.instagram.com/food_story_nagy/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 3.18A6.62 6.62 0 1 0 18.62 12 6.63 6.63 0 0 0 12 5.38zm0 10.92A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.88-11.18a1.55 1.55 0 1 1-1.55-1.55 1.55 1.55 0 0 1 1.55 1.55z"/></svg>
+      </a>
+      <a href="mailto:info@foodstory.at" aria-label="E-Mail">
+        <svg viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.3 7h15.4L12 12.2zM4 8.6V17h16V8.6l-7.4 5a1 1 0 0 1-1.2 0L4 8.6z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a href="#">Home</a>
+    <a href="#garten">Garten</a>
+    <a href="#festival">Eats&amp;Beats Festival</a>
+    <a href="#uber">Über uns</a>
+    <a href="#menu">Galerie</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
+  <div class="hero-copy">
+    <h1>Auch das Essen hat seine eigene Geschichte!</h1>
+    <div class="sub">Entdecken Sie es mit uns in Food Story.</div>
+    <svg class="squiggle" viewBox="0 0 180 18"><path d="M4 12 C 40 2, 70 16, 100 8 S 160 4, 176 10"/></svg>
+    <p>Wir werden froh sein, wenn unsere Speisen Teil Ihrer Geschichte werden – kommen Sie zu uns
+       in die Food Story und überzeugen Sie sich selbst!</p>
+    <a class="btn" href="#intro">Mehr ›</a>
+  </div>
+</header>
+
+<section class="block" id="intro">
+  <div class="wrap">
+    <div class="eyebrow">Food Story</div>
+    <h2 class="h2">Hochwertige Speisen in einer Umgebung, in die Sie sich verlieben werden</h2>
+    <p class="lead">Am Anfang stand die Idee, <b>hochwertige, hausgemachte Speisen</b> zu kreieren, die durch einen
+      <b>besonderen Ansatz</b> unterstrichen werden und nicht nur kleine, sondern auch große Fans von Langoschen,
+      Baumkuchen oder Pfannkuchen begeistern werden. Das Ergebnis ist eine <b>Food Story – eine Geschichte der Speisen</b>,
+      die wir Ihnen gerne vorstellen möchten.</p>
+    <p class="lead">In <b>angenehmer Atmosphäre</b> bereiten wir für Sie <b>verschiedene Arten von hausgemachten</b> Speisen
+      in interessantem Design zu. Wir glauben, dass unsere Gerichte Ihre Stimmung verbessern,
+      <b>ein angenehmes Gourmet-Erlebnis</b> bieten und zu einem Teil Ihres Tages werden, auf den Sie sich freuen werden.</p>
+  </div>
+</section>
+
+<section class="block menu" id="menu">
+  <div class="wrap">
+    <div class="eyebrow">Speisekarte</div>
+    <h2 class="h2">Unsere Spezialitäten</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="pill">Langos</span>
+        <div class="grp">
+          <div class="label">Beläge</div>
+          <ul><li>Sauerrahm</li><li>Ketchup</li><li>Zwiebel</li><li>Rucola</li><li>Käse</li><li>Schinken</li><li>Salami</li></ul>
+        </div>
+      </div>
+      <div class="card">
+        <span class="pill">Baumkuchen</span>
+        <div class="grp">
+          <div class="label">Streusel</div>
+          <ul><li>Zimtzucker</li><li>Vanillezucker</li><li>Zucker</li><li>Walnuss</li><li>Kokos</li><li>Keks</li><li>Kakaopulver</li><li>Mohn &amp; Zucker</li></ul>
+        </div>
+        <div class="grp">
+          <div class="label">Innen bestrichen</div>
+          <ul><li>Nuss-Nougat</li><li>Schokolade</li><li>Karamell</li><li>Erdbeere</li></ul>
+        </div>
+      </div>
+      <div class="card">
+        <span class="pill">Mini Palatschinken</span>
+        <div class="grp">
+          <div class="label">Streusel</div>
+          <ul><li>Zimtzucker</li><li>Vanillezucker</li><li>Zucker</li><li>Walnuss</li><li>Kokos</li><li>Keks</li><li>Kakaopulver</li><li>Mohn &amp; Zucker</li></ul>
+        </div>
+        <div class="grp">
+          <div class="label">Dressing &amp; Special</div>
+          <ul><li>Schokolade</li><li>Karamell</li><li>Erdbeere</li><li>Frucht-Sahne</li><li>Soft-Eis</li><li>Schokolinsen</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="garten">
+  <div class="wrap split">
+    <div class="text">
+      <div class="eyebrow">Garten</div>
+      <h2>Food Story Garten – eine schmackhafte Symbiose aus Lebensmittel und Umwelt</h2>
+      <p>Im ehemaligen Kolarik's Himmelreich im Prater bieten wir Ihnen hausgemachte Speisen
+         in entspannter Atmosphäre – mit Terrasse, Spielplatz und allem, was einen Tag im Grünen ausmacht.</p>
+      <a class="btn" href="#kontakt">Mehr ›</a>
+    </div>
+    <div class="photo">Food Story Garten</div>
+  </div>
+</section>
+
+<section class="block menu" id="uber">
+  <div class="wrap split">
+    <div class="photo">Über uns</div>
+    <div class="text">
+      <div class="eyebrow">Über uns</div>
+      <h2>Food Story – die Geschichte der Speisen ist auch unsere Geschichte</h2>
+      <p>Hinter Food Story steht die Leidenschaft für ehrliche, hausgemachte Küche – ungarische Langos,
+         Baumkuchen und Mini-Palatschinken, frisch zubereitet, mit Liebe zum Detail.</p>
+      <a class="btn" href="#kontakt">Mehr ›</a>
+    </div>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="wrap fgrid">
+    <div>
+      <h4>Adresse</h4>
+      <p>~ Prater 74, 1020 Wien ~<br>Food Story Garten<br>im ehemaligen Kolarik's Himmelreich
+         (Kreuzung Straße des Ersten Mai &amp; Zufahrtsstraße).</p>
+      <p style="margin-top:14px">~ Karl-Kolarik-Weg 86A, 1020 Wien ~<br>Playground &amp; Food</p>
+      <p style="margin-top:14px"><a href="https://www.google.com/maps/place/Kolariks+Himmelreich/@48.2147566,16.403738,17z" target="_blank">› Google Maps</a></p>
+    </div>
+    <div>
+      <h4>Öffnungszeiten</h4>
+      <p><b style="color:#e9ddd4">Karl-Kolarik-Weg 86A</b><br>Mo–So 10–23 Uhr</p>
+      <p style="margin-top:14px"><b style="color:#e9ddd4">Garten, Prater 74</b><br>
+        Mo 16–22 · Di–Do 15–22<br>Fr–Sa &amp; Ftg 11–23 · So 11–21 Uhr</p>
+      <p style="margin-top:10px;font-size:13px;color:#9d9088">Abweichungen je nach Witterung möglich.</p>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="mailto:info@foodstory.at">info@foodstory.at</a></li>
+        <li><a href="https://www.instagram.com/food_story_nagy/" target="_blank">@food_story_nagy</a></li>
+      </ul>
+      <h4 style="margin-top:26px">Zahlung</h4>
+      <p>Bargeld</p>
+    </div>
+  </div>
+  <div class="wrap copy">
+    <span>© 2024 Food Story. All rights reserved.</span>
+    <span>Cookies · Datenschutz</span>
+  </div>
+</footer>
+
+<script>
+  const b=document.getElementById('burger'),n=document.getElementById('nav');
+  b.addEventListener('click',()=>n.classList.toggle('open'));
+  n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('open')));
+</script>
+</body>
+</html>
